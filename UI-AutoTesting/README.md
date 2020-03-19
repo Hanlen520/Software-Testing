@@ -82,5 +82,100 @@ Chrome 浏览器 直接进入 `扩展程序应用商店` 搜索添加安装即�
 其他的浏览器不做一一介绍。
 
 ## Selenium元素定位问题
+以百度搜索为例
 
+在Selenium自动化测试中，提供了单个元素定位方式和多个元素定位方式。
+
+两种方式都是根据`元素属性 ID、NAME、CLASS_NAME、TAG_NAME、CSS_SELECTOR、XPATH、LINK_TEXT、PARTIAL_LINK_TEXT` 来进行定位。
+
+### Webdriver采用的基本元素定位方式
+![](https://github.com/SolerHo/Software-Testing/blob/master/UI-AutoTesting/Images/%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7.png)
+
+#### 1.ID属性
+
+可以看到，输入框的id为：kw，使用方法：` find_element_by_id` ，代码如下：
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: ID属性定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com") // 获取url
+wb.implicitly_wait(5) 
+wb.find_element_by_id('kw').send_keys('python')
+wb.quit()
+```
+
+#### 2.name属性
+name属性为：wd ,使用的方法：`find_element_by_name`。代码如下：
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: name属性定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com")
+wb.implicitly_wait(5)
+wb.find_element_by_name('wd').send_keys('python')
+```
+#### 3.class_name属性
+class_name 属性为：s_ipt，使用的方法：`find_element_by_class_name`。代码如下：
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: calss_name属性定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com")
+wb.implicitly_wait(5)
+wb.find_element_by_class_name('s_ipt').send_keys('python')
+wb.quit()
+```
+
+#### 4.使用Xpath定位
+使用的方法是：`find_element_by_xpath`。
+
+具体的xpath获取方式：
+
+定位到某个属性，然后右键 `copy ---> copy xpath`即可。
+
+![](https://github.com/SolerHo/Software-Testing/blob/master/UI-AutoTesting/Images/Xpath%E5%AE%9A%E4%BD%8D.png)
+
+代码如下：
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: xpath进行定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com")
+wb.implicitly_wait(5)
+wb.find_element_by_xpath('//*[@id="kw"]').send_keys('python')
+wb.quit()
+
+```
 
