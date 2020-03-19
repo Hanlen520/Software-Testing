@@ -91,6 +91,8 @@ Chrome 浏览器 直接进入 `扩展程序应用商店` 搜索添加安装即�
 ### Webdriver采用的基本元素定位方式
 ![](https://github.com/SolerHo/Software-Testing/blob/master/UI-AutoTesting/Images/%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7.png)
 
+#### 一、针对单个元素定位
+
 #### 1.ID属性
 
 可以看到，输入框的id为：kw，使用方法：` find_element_by_id` ，代码如下：
@@ -179,3 +181,57 @@ wb.quit()
 
 ```
 
+#### 5.对超链接的处理的`LINK_TEXT`
+HTML的代码中主要是以 `标签a` 对应，使用的方法是：`find_element_by_link_text`。
+
+HTML代码
+```
+<a href="http://xueshu.baidu.com" target="_blank" class="mnav">学术</a>
+```
+
+Python代码
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: Link_text定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com")
+wb.implicitly_wait(10)
+wb.find_element_by_link_text(u'学术').click()
+```
+#### 6.链接处理`PARTIAL_LINK_TEXT`
+PARTIAL_LINK_TEXT 也用于对超链接的处理，它与 LINK_TEXT 不同的是，它是按`模糊搜索方式`处理的。
+
+#### 7.css选择器定位
+使用ID、NAME等方式无法定位元素时，可使用 `CSS_SELECTOR`，使用的方法是：`find_element_by_css_selector`。
+
+css选择器定位，获取选择器的方式：
+
+![](https://github.com/SolerHo/Software-Testing/blob/master/UI-AutoTesting/Images/css%E9%80%89%E6%8B%A9%E5%99%A8%E5%AE%9A%E4%BD%8D.png)
+
+Python代码如下：
+```
+"""
+Date: 2020 - 03 - 19
+Author: Soler HO
+Description: CSS选择器定位
+"""
+
+# coding = utf-8
+import time
+from selenium import webdriver
+
+wb = webdriver.Chrome()
+wb.get("http://www.baidu.com")
+wb.implicitly_wait(10)
+wb.find_element_by_css_selector('#kw').send_keys('Python3')
+```
+
+#### 二、针对多个元素定位
